@@ -9,7 +9,9 @@ namespace Player
         private Animator _animator;
         private PlayerMovement _playerMovement;
         
-        public bool isSprinting;
+        [SerializeField] private Transform groundCheck;
+        [SerializeField] private LayerMask groundLayer;
+        
         public bool isGrounded;
         
         private void Awake()
@@ -23,14 +25,15 @@ namespace Player
         {
             float delta = Time.deltaTime;
             
+            GroundCheck();
             _inputHandler.TickInput(delta);
             _playerMovement.HandleMovement(delta);
+            _playerMovement.HandleJumping();
         }
 
-        
-        private void LateUpdate()
+        private void GroundCheck()
         {
-            _inputHandler.sprintFlag = false;
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
         }
     }
 }

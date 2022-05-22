@@ -12,12 +12,8 @@ namespace Player
         public Rigidbody2D rigidBody2D;
         public Vector2 moveDirection;
         public Transform myTransform;
-
-        [SerializeField] private Transform groundCheck;
-        [SerializeField] private LayerMask groundLayer;
         
         [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private float sprintSpeed = 8f;
         [SerializeField] private float jumpingPower = 15f;
 
         private bool _isFacingRight;
@@ -30,67 +26,49 @@ namespace Player
             myTransform = transform;
         }
 
-
+        #region Movement
         public void HandleMovement(float delta)
         {
-            moveDirection = myTransform.right * _inputHandler.horizontal;
+            moveDirection = myTransform.right * _inputHandler.moveAmount;
             moveDirection.Normalize();
 
             float speed = movementSpeed;
-
-            if (_inputHandler.sprintFlag && _inputHandler.moveAmount >0.5f)
-            {
-                speed = sprintSpeed;
-                _playerManager.isSprinting = true;
-                moveDirection *= speed;
-            }
-            else
-            {
-                _playerManager.isSprinting = false;
-                moveDirection *= speed;
-            }
-
-            rigidBody2D.velocity = new Vector2(moveDirection.x, rigidBody2D.velocity.y);
+            
+            rigidBody2D.velocity = new Vector2(moveDirection.x * speed, rigidBody2D.velocity.y);
 
             if (!_isFacingRight && moveDirection.x > 0f)
             {
-                Flip();
+                FlipSprite();
             }
             else if (_isFacingRight && moveDirection.x < 0f)
             {
-                Flip();
-            }
-            
-        }
-
-        public void Jump(InputAction.CallbackContext context)
-        {
-            if (context.performed && IsGrounded())
-            {
-                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpingPower);
-            }
-
-            if (context.canceled && rigidBody2D.velocity.y > 0f)
-            {
-                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y * 0.5f);
+                FlipSprite();
             }
         }
-        private bool IsGrounded()
-        {
-            return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
-        }
-
-        private void Flip()
+        private void FlipSprite()
         {
             _isFacingRight = !_isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
-        
-        
-        
-        
+        #endregion
+        #region Jumping
+        public void HandleJumping()
+        {
+            if (_inputHandler.jumpFlag && _playerManager.isGrounded)
+            {
+                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpingPower);
+            }
+            if (_inputHandler.jumpFlag == false && rigidBody2D.velocity.y > 0f)
+            {
+                Vector2 velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y * 0.5f);
+                rigidBody2D.velocity = velocity;
+            }
+        }
+        #endregion
+
+      
         
     }
 }

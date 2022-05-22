@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,13 +5,13 @@ namespace Player
 {
     public class InputHandler : MonoBehaviour
     {
-        [SerializeField] public float horizontal;
         [SerializeField] public float moveAmount;
 
         private PlayerControls _inputActions;
         private Vector2 _movementInput;
-        
-        public bool sprintFlag;
+
+        public bool spaceInput;
+        public bool jumpFlag;
 
 
         private void OnEnable()
@@ -24,7 +23,7 @@ namespace Player
             }
         }
 
-        public void OnMovementPerformed(InputAction.CallbackContext context)
+        private void OnMovementPerformed(InputAction.CallbackContext context)
         {
             _movementInput = context.ReadValue<Vector2>();
         }
@@ -37,12 +36,20 @@ namespace Player
 
         private void MovementInput(float delta)
         {
-            horizontal = _movementInput.x;
-            moveAmount = horizontal;
+            moveAmount = _movementInput.x;
         }
-        
-        
-        
+        private void HandleJump(InputAction.CallbackContext context)
+        {
+            spaceInput = context.performed;
+            if (spaceInput) 
+            {
+                jumpFlag = true; 
+            }
+            else
+            {
+                jumpFlag = false;
+            }
+        }
         
         public void OnDisable()
         {
