@@ -11,9 +11,10 @@ namespace Player
         
         [SerializeField] private Transform groundCheck;
         [SerializeField] private LayerMask groundLayer;
+
         
         public bool isGrounded;
-        
+        public bool canClimb;
         private void Awake()
         {
             _inputHandler = GetComponent<InputHandler>();
@@ -27,13 +28,30 @@ namespace Player
             
             GroundCheck();
             _inputHandler.TickInput(delta);
-            _playerMovement.HandleMovement(delta);
-            _playerMovement.HandleJumping();
+            _playerMovement.TickInput(delta);
         }
 
         private void GroundCheck()
         {
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        }
+
+        
+        
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag(TagManager.Ladder))
+            {
+                canClimb = true;
+            }
+        }
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag(TagManager.Ladder))
+            {
+                canClimb = false;
+            }
         }
     }
 }

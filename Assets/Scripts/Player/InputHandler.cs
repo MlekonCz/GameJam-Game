@@ -5,8 +5,9 @@ namespace Player
 {
     public class InputHandler : MonoBehaviour
     {
-        [SerializeField] public float moveAmount;
-
+        [SerializeField] public float horizontalMovement;
+        [SerializeField] public float verticalMovement;
+        
         private PlayerControls _inputActions;
         private Vector2 _movementInput;
 
@@ -36,7 +37,8 @@ namespace Player
 
         private void MovementInput(float delta)
         {
-            moveAmount = _movementInput.x;
+            horizontalMovement = _movementInput.x;
+            verticalMovement = _movementInput.y;
         }
         private void HandleJump(InputAction.CallbackContext context)
         {
