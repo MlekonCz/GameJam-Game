@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 5339809633707485621}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,7 +132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5bd93a319e91d4db5af520573620eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveAmount: 0
+  horizontalMovement: 0
+  verticalMovement: 0
   spaceInput: 0
   jumpFlag: 0
 --- !u!114 &5339809633707485618
@@ -152,7 +153,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
-  isJumping: 0
+  canClimb: 0
 --- !u!114 &5339809633707485617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,10 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5589329edf8914b8a5aec9f02242c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody2D: {fileID: 0}
-  moveDirection: {x: 0, y: 0}
-  myTransform: {fileID: 0}
+  gravityScale: 1.5
   movementSpeed: 5
+  climbSpeed: 5
   jumpingPower: 10
 --- !u!50 &5339809633707485616
 Rigidbody2D:

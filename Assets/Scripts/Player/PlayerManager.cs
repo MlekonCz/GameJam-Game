@@ -12,6 +12,7 @@ namespace Player
         [SerializeField] private Transform groundCheck;
         [SerializeField] private LayerMask groundLayer;
 
+        public event Action onFinishReached;
         
         public bool isGrounded;
         public bool canClimb;
@@ -36,8 +37,14 @@ namespace Player
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
         }
 
-        
-        
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.CompareTag(TagManager.Finish))
+            {
+                onFinishReached?.Invoke();
+            }
+        }
 
         private void OnTriggerStay2D(Collider2D other)
         {
