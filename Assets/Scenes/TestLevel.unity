@@ -598,11 +598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7616618259923151489, guid: 2f5c05e9eb325cd47b51e6ba67abd326, type: 3}
       propertyPath: m_DynamicOccludee
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7616618259923151500, guid: 2f5c05e9eb325cd47b51e6ba67abd326, type: 3}
-      propertyPath: knockPower
-      value: 150
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f5c05e9eb325cd47b51e6ba67abd326, type: 3}

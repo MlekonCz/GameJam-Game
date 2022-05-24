@@ -16,7 +16,7 @@ namespace Player
         }
 
 
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {
             _currentHealth--;
             if (_currentHealth <= 0)

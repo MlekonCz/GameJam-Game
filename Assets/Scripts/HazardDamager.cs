@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class HazardDamager : MonoBehaviour
 {
-    [SerializeField] private float knockPower = 1500f;
+    [SerializeField] private float knockPower = 100f;
+    [SerializeField] private float knockDuration = 0.4f;
     private Vector2 _pushDirection;
 
 
@@ -15,26 +16,24 @@ public class HazardDamager : MonoBehaviour
         GameObject player = other.gameObject;
         if (player.CompareTag(TagManager.Player))
         {
-            player.GetComponent<PlayerStats>().TakeDamage();
+            player.GetComponent<PlayerStats>().TakeDamage(1);
 
             var direction = (player.transform.position - transform.position);
 
-            StartCoroutine(KnockBack(0.2f,knockPower,direction, player));
+            KnockBack(knockDuration,direction, player);
             
            // player.GetComponent<Rigidbody2D>().velocity = direction * knockPower;
-           // player.GetComponent<Rigidbody2D>().AddForce(direction * knockPower, ForceMode2D.Force);
         }
     }
     
-    private IEnumerator KnockBack(float knockDuration, float knockBackPower, Vector2 knockBackDirection,GameObject player)
+    private void KnockBack(float knockDuration, Vector2 knockBackDirection,GameObject player)
     {
         float timer = 0;
         while (knockDuration > timer)
         {
             timer += Time.deltaTime;
-                
+             
             player.GetComponent<Rigidbody2D>().AddForce(knockBackDirection * knockPower);
         }
-        yield return 0;
     }
 }

@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MlekonCz.unity
     guid: 816b64a281fecce41b0a8a146a302f1a
   - enabled: 1
-    path: Assets/Scenes/TestScene.unity
-    guid: fc1089ee6ffe32940a405f6c29d4f353
+    path: Assets/Scenes/TestLevel.unity
+    guid: 9ca58a464f929f041bb985ae4bb62efe
   m_configObjects: {}
