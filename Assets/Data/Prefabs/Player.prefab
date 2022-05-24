@@ -111,14 +111,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5339809633707485620}
-  - component: {fileID: 5339809633707485619}
   - component: {fileID: 5339809633707485618}
   - component: {fileID: 5339809633707485617}
   - component: {fileID: 5339809633707485616}
   - component: {fileID: 5339809633707485583}
+  - component: {fileID: 5339809633707485619}
   - component: {fileID: 5339809633707485621}
   - component: {fileID: 6836478551575492767}
   - component: {fileID: 4918061392957205416}
+  - component: {fileID: 1655584353859053420}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -142,22 +143,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5339809633707485619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5339809633707485582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5bd93a319e91d4db5af520573620eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalMovement: 0
-  verticalMovement: 0
-  spaceInput: 0
-  jumpFlag: 0
 --- !u!114 &5339809633707485618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +159,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  isInteracting: 0
   isGrounded: 0
   canClimb: 0
 --- !u!114 &5339809633707485617
@@ -239,6 +225,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.3353634}
   m_EdgeRadius: 0
+--- !u!114 &5339809633707485619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5339809633707485582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5bd93a319e91d4db5af520573620eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  horizontalMovement: 0
+  verticalMovement: 0
+  spaceInput: 0
+  jumpFlag: 0
+  attackInput: 0
+  defendInput: 0
 --- !u!114 &5339809633707485621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +300,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 86f4596c-c2f0-4e55-bb5c-38326a24d82c
     m_ActionName: Player Movement/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5339809633707485619}
+        m_TargetAssemblyTypeName: Player.InputHandler, Assembly-CSharp
+        m_MethodName: HandleAttacking
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a733ea01-32bc-49d0-81e1-0825ba73b276
+    m_ActionName: Player Actions/Attack[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5339809633707485619}
+        m_TargetAssemblyTypeName: Player.InputHandler, Assembly-CSharp
+        m_MethodName: HandleDefending
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7d6e76d2-0c41-47f9-89f1-e0e02ad0c2bf
+    m_ActionName: Player Actions/Defend[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5339809633707485619}
+        m_TargetAssemblyTypeName: Player.InputHandler, Assembly-CSharp
+        m_MethodName: HandleAttacking
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8496f9a3-49f8-4e5e-8bf3-1cd0aced11aa
+    m_ActionName: Player Movement/Attack[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5339809633707485619}
+        m_TargetAssemblyTypeName: Player.InputHandler, Assembly-CSharp
+        m_MethodName: HandleDefending
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 9d213d66-9dd6-4111-8a61-02fde21093d6
+    m_ActionName: Player Movement/Defend[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player Movement
@@ -324,6 +392,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc4eac52bbf240bdafa68da6c5f839b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1655584353859053420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5339809633707485582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16861c6d0a74c29aad0acf7167271ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5339809634446424719

@@ -15,12 +15,12 @@ namespace Player
             _inputHandler = GetComponent<InputHandler>();
         }
 
-        private void HandleAttacking()
+        public void HandleAttacking()
         {
             _animationHandler.PlayTargetAnimation("Attack", true);
         }
 
-        private void HandleDefending()
+        public void HandleDefending()
         {
             _animationHandler.PlayTargetAnimation("Defend", true);
         }

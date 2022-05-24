@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7616618259923151489}
   - component: {fileID: 7616618259923151490}
   - component: {fileID: 7616618259923151491}
-  - component: {fileID: 7616618259923151500}
+  - component: {fileID: 7101773885463212912}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Hazard
@@ -75,7 +75,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -214,7 +214,7 @@ PolygonCollider2D:
       - {x: -0.7750748, y: -1.2572155}
       - {x: -0.7925186, y: -1.2572865}
       - {x: -1.658033, y: -1.2608037}
---- !u!114 &7616618259923151500
+--- !u!114 &7101773885463212912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,4 +226,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d58e80af6c206498091ce4984376a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockPower: 250
+  knockPower: 150
+  knockDuration: 0.4

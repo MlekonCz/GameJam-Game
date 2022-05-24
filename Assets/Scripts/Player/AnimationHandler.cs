@@ -34,6 +34,7 @@ namespace Player
 
         public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
         {
+            Debug.Log(targetAnimation);
             _animator.SetBool("isInteracting", isInteracting);
             _animator.Play(targetAnimation);
         }

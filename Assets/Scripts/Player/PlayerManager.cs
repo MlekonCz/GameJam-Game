@@ -13,20 +13,22 @@ namespace Player
         [SerializeField] private LayerMask groundLayer;
 
         public event Action onFinishReached;
-        
+
+        public bool isInteracting;
         public bool isGrounded;
         public bool canClimb;
         private void Awake()
         {
             _inputHandler = GetComponent<InputHandler>();
-            _animator = GetComponent<Animator>();
+            _animator = GetComponentInChildren<Animator>();
             _playerMovement = GetComponent<PlayerMovement>();
         }
 
         private void Update()
         {
             float delta = Time.deltaTime;
-            
+
+            isInteracting = _animator.GetBool("isInteracting");
             GroundCheck();
             _inputHandler.TickInput(delta);
             _playerMovement.TickInput(delta);
