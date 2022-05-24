@@ -9,14 +9,16 @@ namespace Player
         private InputHandler _inputHandler;
         private PlayerManager _playerManager;
 
-        private Rigidbody2D _rigidBody2D;
-        private Vector2 _moveDirection;
-        private Vector2 _climbDirection;
-        private Transform _myTransform;
+        public Rigidbody2D rigidBody2D;
+        public Vector2 moveDirection;
+        public Transform myTransform;
+        public Animator playerAnimator;
+
+        [SerializeField] private Transform groundCheck;
+        [SerializeField] private LayerMask groundLayer;
         
-        [SerializeField] private float gravityScale = 1.5f;
         [SerializeField] private float movementSpeed = 5f;
-        [SerializeField] private float climbSpeed = 5f;
+        [SerializeField] private float sprintSpeed = 8f;
         [SerializeField] private float jumpingPower = 15f;
 
         private bool _isFacingRight;
@@ -25,91 +27,73 @@ namespace Player
         {
             _inputHandler = GetComponent<InputHandler>();
             _playerManager = GetComponent<PlayerManager>();
-            _rigidBody2D = GetComponent<Rigidbody2D>();
-            _myTransform = transform;
+            rigidBody2D = GetComponent<Rigidbody2D>();
+            myTransform = transform;
         }
 
-        public void TickInput(float delta)
-        {
-            HandleMovement(delta);
-            HandleJumping();
-            HandleClimbing();
-            HandleFalling();
-        }
-        #region Movement
-        private void HandleMovement(float delta)
-        {
-            _moveDirection = _myTransform.right * _inputHandler.horizontalMovement;
-            _moveDirection.Normalize();
 
-            _rigidBody2D.velocity = new Vector2(_moveDirection.x * movementSpeed, _rigidBody2D.velocity.y);
-
-            if (!_isFacingRight && _moveDirection.x > 0f)
-            {
-                FlipSprite();
-            }
-            else if (_isFacingRight && _moveDirection.x < 0f)
-            {
-                FlipSprite();
-            }
-        }
-
-        private void HandleClimbing()
+        public void HandleMovement(float delta)
         {
-            if (_playerManager.canClimb )
+            moveDirection = myTransform.right * _inputHandler.horizontal;
+            moveDirection.Normalize();
+
+            float speed = movementSpeed;
+
+            if (_inputHandler.sprintFlag && _inputHandler.moveAmount >0.5f)
             {
-                _rigidBody2D.gravityScale = 0f;
+                speed = sprintSpeed;
+                _playerManager.isSprinting = true;
+                moveDirection *= speed;
             }
             else
             {
-                _rigidBody2D.gravityScale = gravityScale;
-                return;
+                _playerManager.isSprinting = false;
+                moveDirection *= speed;
+                
+            }
+
+            rigidBody2D.velocity = new Vector2(moveDirection.x, rigidBody2D.velocity.y);
+
+            if (!_isFacingRight && moveDirection.x > 0f)
+            {
+                Flip();
+                playerAnimator.SetFloat("Speed",1.0f);
+            }
+            else if (_isFacingRight && moveDirection.x < 0f)
+            {
+                Flip();
             }
             
-            _climbDirection = transform.up * _inputHandler.verticalMovement;
-            _climbDirection.Normalize();
-
-            _rigidBody2D.velocity = new Vector2(_rigidBody2D.velocity.x, _climbDirection.y * climbSpeed);
         }
-        
-        private void FlipSprite()
+
+        public void Jump(InputAction.CallbackContext context)
+        {
+            if (context.performed && IsGrounded())
+            {
+                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpingPower);
+            }
+
+            if (context.canceled && rigidBody2D.velocity.y > 0f)
+            {
+                rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y * 0.5f);
+            }
+        }
+        private bool IsGrounded()
+        {
+            return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        }
+
+        private void Flip()
         {
             _isFacingRight = !_isFacingRight;
             Vector3 localScale = transform.localScale;
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
-        #endregion
-        #region Jumping
-        private void HandleJumping()
-        {
-            if (_inputHandler.jumpFlag && _playerManager.isGrounded)
-            { 
-                _rigidBody2D.velocity = new Vector2(_rigidBody2D.velocity.x, jumpingPower);
-            }
-            else if (_inputHandler.jumpFlag == false && _rigidBody2D.velocity.y > 0f)
-            {
-                Vector2 velocity = new Vector2(_rigidBody2D.velocity.x, _rigidBody2D.velocity.y * 0.5f);
-                _rigidBody2D.velocity = velocity;
-            }
-        }
-
-        private void HandleFalling()
-        {
-            if (_playerManager.canClimb){return;}
-            
-            if (_rigidBody2D.velocity.y < 0f)
-            {
-                _rigidBody2D.gravityScale = gravityScale * 2;
-            }
-            else
-            {
-                _rigidBody2D.gravityScale = gravityScale;
-            }
-        }
-        #endregion
-
-      
+        
+        
+        
+        
         
     }
 }
