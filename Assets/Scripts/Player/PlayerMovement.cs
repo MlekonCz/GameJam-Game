@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -91,11 +89,11 @@ namespace Player
             { 
                 _rigidBody2D.velocity = new Vector2(_rigidBody2D.velocity.x, jumpingPower);
             }
-            else if (_inputHandler.jumpFlag == false && _rigidBody2D.velocity.y > 0f)
-            {
-                Vector2 velocity = new Vector2(_rigidBody2D.velocity.x, _rigidBody2D.velocity.y * 0.5f);
-                _rigidBody2D.velocity = velocity;
-            }
+            // else if (_inputHandler.jumpFlag == false && _rigidBody2D.velocity.y > 0f)
+            // {
+            //     Vector2 velocity = new Vector2(_rigidBody2D.velocity.x, _rigidBody2D.velocity.y * 0.5f);
+            //     _rigidBody2D.velocity = velocity;
+            // }
         }
 
         private void HandleFalling()

@@ -33,12 +33,17 @@ namespace Player
             _inputHandler.TickInput(delta);
             _playerMovement.TickInput(delta);
         }
-
+        private void LateUpdate()
+        {
+            _inputHandler.jumpFlag = false;
+        }
         private void GroundCheck()
         {
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
         }
 
+        
+        
 
         private void OnTriggerEnter2D(Collider2D other)
         {

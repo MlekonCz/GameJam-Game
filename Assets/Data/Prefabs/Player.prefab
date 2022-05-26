@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 8001186702606735678}
   - component: {fileID: 8687892224442890598}
   - component: {fileID: 7712282667352751234}
-  m_Layer: 0
+  - component: {fileID: 770165381}
+  - component: {fileID: 770165382}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,6 +104,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &770165381
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455443961928488793}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.0663856, y: -0.14047813}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 3, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9465172, y: 2.185226}
+  m_EdgeRadius: 0
+--- !u!114 &770165382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3455443961928488793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a950947d8840f2a17c13b155bb6d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponDamage: 1
 --- !u!1 &5339809633707485582
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,8 +160,8 @@ GameObject:
   - component: {fileID: 5339809633707485621}
   - component: {fileID: 6836478551575492767}
   - component: {fileID: 4918061392957205416}
-  - component: {fileID: 1655584353859053420}
-  m_Layer: 0
+  - component: {fileID: 662174870}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -314,38 +355,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: a733ea01-32bc-49d0-81e1-0825ba73b276
-    m_ActionName: Player Actions/Attack[/Keyboard/j]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5339809633707485619}
-        m_TargetAssemblyTypeName: Player.InputHandler, Assembly-CSharp
-        m_MethodName: HandleDefending
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7d6e76d2-0c41-47f9-89f1-e0e02ad0c2bf
-    m_ActionName: Player Actions/Defend[/Keyboard/k]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5339809633707485619}
-        m_TargetAssemblyTypeName: Player.InputHandler, Assembly-CSharp
-        m_MethodName: HandleAttacking
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_ActionId: 8496f9a3-49f8-4e5e-8bf3-1cd0aced11aa
     m_ActionName: Player Movement/Attack[/Keyboard/j]
   - m_PersistentCalls:
@@ -366,7 +375,7 @@ MonoBehaviour:
     m_ActionName: Player Movement/Defend[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player Movement
+  m_DefaultActionMap: Player Actions
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &6836478551575492767
@@ -394,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc4eac52bbf240bdafa68da6c5f839b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1655584353859053420
+--- !u!114 &662174870
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5339809634446424752}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

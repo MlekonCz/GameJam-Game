@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7616618259744468323}
   - component: {fileID: 4610506551870212308}
   - component: {fileID: 4951827438794014114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spike
   m_TagString: Hazard
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7616618259923151501}
   - component: {fileID: 7616618259923151489}
   - component: {fileID: 7616618259923151490}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spike
   m_TagString: Hazard
   m_Icon: {fileID: 0}
