@@ -50,8 +50,8 @@ namespace Core
                 PlayerStats playerStats = collider.GetComponent<PlayerStats>();
          
                 if (playerStats != null)
-                {
-                    playerStats.TakeDamage(currentWeaponDamage);
+                { 
+                    //       playerStats.TakeDamage(currentWeaponDamage);
                 }
             }
 

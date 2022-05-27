@@ -7,7 +7,8 @@ namespace Enemy
         DoubleJump,
         WallWalk,
         SpeedBoost,
-        BiggerStrength
+        BiggerStrength,
+        Empty
     }
     
     [CreateAssetMenu(fileName = "Enemy", menuName = "Enemy", order = 0)]

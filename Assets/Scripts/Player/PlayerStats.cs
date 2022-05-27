@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Enemy;
 using UnityEngine;
 
 namespace Player
@@ -8,6 +9,8 @@ namespace Player
     {
         [SerializeField] private int maxHealth = 3;
         private int _currentHealth;
+        
+        private DeathAbilities _deathAbility;
         public event Action onPlayerDeath;
 
         private bool _isImmune;
@@ -27,15 +30,19 @@ namespace Player
             }
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, DeathAbilities deathAbility)
         {
             if (_isImmune){return;}
             _currentHealth--;
             _immuneTime = 0f;
             if (_currentHealth <= 0)
             {
+                if (deathAbility != DeathAbilities.Empty)
+                {
+                    _deathAbility = deathAbility;
+                }
                 //Die animation
-                Debug.Log("You died!");
+                Debug.Log("You died! and gained: " + _deathAbility);
                 onPlayerDeath?.Invoke();
             }
         }
